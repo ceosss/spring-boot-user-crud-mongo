@@ -12,6 +12,7 @@ import com.swaraj.spring_boot_user_crud_mongo.model.User;
 import com.swaraj.spring_boot_user_crud_mongo.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/users")
@@ -33,8 +34,13 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @PostMapping
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
     @PutMapping("/{id}")
-    public Optional<User> updateUser(@PathVariable String id, @RequestBody User updateUser) {
+    public User updateUser(@PathVariable String id, @RequestBody User updateUser) {
         return userService.updateUser(id, updateUser);
     }
 

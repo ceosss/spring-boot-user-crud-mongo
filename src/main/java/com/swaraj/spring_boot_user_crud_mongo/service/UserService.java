@@ -24,7 +24,11 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Optional<User> updateUser(String id, User updateUser) {
+    public User createUser(User user) {
+        return userRepository.save(user);
+    }
+
+    public User updateUser(String id, User updateUser) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (!optionalUser.isPresent()) {
             throw new Error("user not found");
@@ -48,8 +52,6 @@ public class UserService {
             user.setDob(updateUser.getDob());
         }
 
-        userRepository.save(user);
-
-        return userRepository.findById(id);
+        return userRepository.save(user);
     }
 }
