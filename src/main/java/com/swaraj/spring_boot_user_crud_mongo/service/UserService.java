@@ -54,4 +54,13 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public void deleteUser(String id) {
+        boolean exists = userRepository.existsById(id);
+        if (!exists) {
+            throw new Error("user doesn't exist");
+        }
+
+        userRepository.deleteById(id);
+    }
 }

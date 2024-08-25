@@ -3,6 +3,7 @@ package com.swaraj.spring_boot_user_crud_mongo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,11 @@ public class UserController {
     @PutMapping("/{id}")
     public User updateUser(@PathVariable String id, @RequestBody User updateUser) {
         return userService.updateUser(id, updateUser);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable String id) {
+        userService.deleteUser(id);
     }
 
 }
