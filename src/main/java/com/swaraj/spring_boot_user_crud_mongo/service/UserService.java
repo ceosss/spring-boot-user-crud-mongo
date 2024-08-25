@@ -23,4 +23,33 @@ public class UserService {
     public Optional<User> getUser(String id) {
         return userRepository.findById(id);
     }
+
+    public Optional<User> updateUser(String id, User updateUser) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (!optionalUser.isPresent()) {
+            throw new Error("user not found");
+        }
+
+        User user = optionalUser.get();
+
+        if (updateUser.getAge() > 0) {
+            user.setAge(updateUser.getAge());
+        }
+
+        if (updateUser.getName() != null) {
+            user.setName(updateUser.getName());
+        }
+
+        if (updateUser.getGender() != null) {
+            user.setGender(updateUser.getGender());
+        }
+
+        if (updateUser.getDob() != null) {
+            user.setDob(updateUser.getDob());
+        }
+
+        userRepository.save(user);
+
+        return userRepository.findById(id);
+    }
 }

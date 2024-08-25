@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.swaraj.spring_boot_user_crud_mongo.model.User;
 import com.swaraj.spring_boot_user_crud_mongo.service.UserService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/users")
@@ -29,6 +31,11 @@ public class UserController {
     @GetMapping("/{id}")
     public Optional<User> getUser(@PathVariable String id) {
         return userService.getUser(id);
+    }
+
+    @PutMapping("/{id}")
+    public Optional<User> updateUser(@PathVariable String id, @RequestBody User updateUser) {
+        return userService.updateUser(id, updateUser);
     }
 
 }
