@@ -2,8 +2,13 @@ package com.swaraj.spring_boot_user_crud_mongo.model;
 
 import java.time.LocalDate;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("users")
 public class User {
-    long id;
+    @Id
+    String id;
     String name;
     int age;
     String gender;
@@ -19,12 +24,8 @@ public class User {
         this.dob = dob;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getName() {

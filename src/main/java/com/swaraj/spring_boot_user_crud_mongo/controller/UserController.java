@@ -1,30 +1,35 @@
 package com.swaraj.spring_boot_user_crud_mongo.controller;
 
-import java.time.LocalDate;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.swaraj.spring_boot_user_crud_mongo.model.User;
+import com.swaraj.spring_boot_user_crud_mongo.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping
     public List<User> getUsers() {
-        List<User> users = List.of(
-                new User("Swaraj", 25, "male", LocalDate.now()),
-                new User("Reo", 1, "unknown", LocalDate.now()));
-        return users;
+        return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public String getUser(@PathVariable String id) {
-        return new String("swaraj" + " " + id);
+    public Optional<User> getUser(@PathVariable String id) {
+        return userRepository.findById(id);
     }
 
 }
